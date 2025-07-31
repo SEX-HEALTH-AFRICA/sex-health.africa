@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sex Health Africa</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      background: purple;
+      color: white;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {
+      margin: 0;
+    }
+    .search-bar {
+      margin: 1rem;
+      text-align: center;
+    }
+    .search-bar input {
+      padding: 0.5rem;
+      width: 80%;
+      max-width: 400px;
+    }
+    .filters {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .filters button {
+      margin: 0.3rem;
+      padding: 0.5rem 1rem;
+      background: #eee;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .filters button.active {
+      background: purple;
+      color: white;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .product {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product h3 {
+      margin: 0.5rem;
+    }
+    .product p {
+      margin: 0.2rem;
+    }
+    .product a {
+      display: inline-block;
+      margin: 0.5rem;
+      background: green;
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    footer {
+      background: #f2f2f2;
+      padding: 1rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sex Health Africa</h1>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for products...">
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterProducts('all')">All</button>
+    <button class="filter-btn" onclick="filterProducts('for-her')">For Her</button>
+    <button class="filter-btn" onclick="filterProducts('for-him')">For Him</button>
+    <button class="filter-btn" onclick="filterProducts('couples')">Couples</button>
+    <button class="filter-btn" onclick="filterProducts('lube')">Lubes & Oils</button>
+    <button class="filter-btn" onclick="filterProducts('toys')">Toys</button>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+    <!-- Example product -->
+    <div class="product for-her toys">
+      <img src="https://example.com/vibrator.jpg" alt="Double Vibrator">
+      <h3>Women's G Spot Vibrator</h3>
+      <p>KSH 2500</p>
+      <a href="https://wa.me/254758173874">Order Now</a>
+    </div>
+    <!-- You’ll add more here later -->
+  </div>
+
+  <footer>
+    <p>Subscribe for updates:</p>
+    <input type="email" placeholder="Your email" />
+  </footer>
+
+  <script>
+    function filterProducts(category) {
+      const products = document.querySelectorAll('.product');
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      products.forEach(product => {
+        if (category === 'all') {
+          product.style.display = 'block';
+        } else {
+          product.style.display = product.classList.contains(category) ? 'block' : 'none';
+        }
+      });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function () {
+      const keyword = this.value.toLowerCase();
+      document.querySelectorAll('.product').forEach(function (product) {
+        const name = product.querySelector('h3').textContent.toLowerCase();
+        product.style.display = name.includes(keyword) ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
